@@ -7,12 +7,12 @@ public class Exemplos2 {
         total = num1 + num2;
         System.out.println("O total da soma é ".concat(total.toString()));
         total = num1 - num2;
-        System.out.println("O total da soma é ".concat(total.toString()));
+        System.out.println("O total da subtração é ".concat(total.toString()));
         total = num1 * num2;
-        System.out.println("O total da soma é ".concat(total.toString()));
+        System.out.println("O total da multiplicação é ".concat(total.toString()));
         total = num1 / num2;
-        System.out.println("O total da soma é ".concat(total.toString()));
-
-
+        System.out.println("O total da divisão é ".concat(total.toString()));
+        total = num1 % num2;
+        System.out.println("O total do módulo é ".concat(total.toString()));
     }
 }
