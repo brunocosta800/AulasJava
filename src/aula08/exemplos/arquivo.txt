@@ -1,0 +1,2 @@
+Novo texto a ser gravado no arquivo
+ Terceiro texto
