@@ -1,10 +1,15 @@
 package aula07;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Desafio {
+    static String[] cabecalho = {"ID", "Nome", "Telefone", "E-mail"};
+    static Scanner scanner = new Scanner(System.in);
+    static String[][] matrizCadastro;
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+
         int opcao;
         String menu = """
                 ________________________________________
@@ -49,11 +54,40 @@ public class Desafio {
     }
 
     public static void cadastrarUsuario(){
-        System.out.println("cadastrarUsuario");
+        System.out.print("Quantas pessoas deseja cadastrar: ");
+        int qtdPessoas = scanner.nextInt();
+        scanner.nextLine();
+
+        String[][] novaMatriz = new String[matrizCadastro.length + qtdPessoas][cabecalho.length];
+
+        for (int linha = 0; linha < matrizCadastro.length; linha++) {
+            novaMatriz[linha] = Arrays.copyOf(matrizCadastro[linha], matrizCadastro[linha].length);
+        }
+
+        for (int linha = matrizCadastro.length; linha < novaMatriz.length; linha++) {
+            System.out.println("Preencha os dados a seguir: ");
+            System.out.println(cabecalho[0] + linha);
+            novaMatriz[linha][0] = String.valueOf(linha);
+
+            for (int coluna = 1; coluna < cabecalho.length; coluna++) {
+                System.out.print(cabecalho[coluna] + ": ");
+                novaMatriz[linha][coluna] = String.valueOf(linha);
+            }
+        }
+
+        matrizCadastro = novaMatriz;
     }
 
     public static void exibirUsuario(){
-        System.out.println("exibirUsuario");
+        String tabela = "";
+        for (String[] linha : matrizCadastro){
+            for (int coluna = 0; coluna < linha.length; coluna++) {
+                tabela += linha[coluna] + "\t\t";
+            }
+            tabela += "\n";
+        }
+
+        System.out.println(tabela);
     }
 
     public static void atualizarUsuario(){
