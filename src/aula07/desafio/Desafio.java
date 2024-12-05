@@ -1,4 +1,4 @@
-package aula07;
+package aula07.desafio;
 
 import java.util.Arrays;
 import java.util.Scanner;
