@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 public class Desafio {
     static String[] cabecalho = {"ID", "Nome", "Telefone", "Email"};
-    static String[][] matrizCadastro={{"",""}} ;
-    static Scanner scanner= new Scanner((System.in));
+    static String[][] matrizCadastro = {{"", ""}};
+    static Scanner scanner = new Scanner((System.in));
 
     public static void main(String[] args) {
-        matrizCadastro[0]=cabecalho;
+        matrizCadastro[0] = cabecalho;
         String menu = """
                 _________________________________________
                 |   Escolha uma opção:                  |
@@ -21,12 +21,12 @@ public class Desafio {
                 |_______________________________________|
                 """;
         int opcao;
-        do{
+        do {
             System.out.println(menu);
             opcao = scanner.nextInt();
             scanner.nextLine();
 
-            switch (opcao){
+            switch (opcao) {
                 case 1:
                     exibirUsuario();
                     break;
@@ -46,17 +46,18 @@ public class Desafio {
                 default:
                     System.out.println("Opção Inválida!");
             }
-        }while(opcao!=5);
+        } while (opcao != 5);
 
     }
 
     private static void exibirUsuario() {
-        String tabela = "";
+        StringBuilder tabela = new StringBuilder();
         for (String[] linha : matrizCadastro) {
             for (int coluna = 0; coluna < linha.length; coluna++) {
-                tabela += linha[coluna] + "\t\t"; // Espaçamento estre as colunas
+                int tamanhoColuna = coluna == 0 ? 5 : (coluna == 2 ? 10 : 25);
+                tabela.append(String.format("%-"+tamanhoColuna+"s | ", linha[coluna]));
             }
-            tabela += "\n"; //Para pular para a próxima linha
+            tabela.append("\n");
         }
         System.out.println(tabela);
     }
@@ -68,22 +69,37 @@ public class Desafio {
 
         String[][] novaMatriz = new String[matrizCadastro.length + qtdPessoas][cabecalho.length];
         for (int linha = 0; linha < matrizCadastro.length; linha++) {
-            novaMatriz[linha] = Arrays.copyOf(matrizCadastro[linha],matrizCadastro[linha].length);
+            novaMatriz[linha] = Arrays.copyOf(matrizCadastro[linha], matrizCadastro[linha].length);
         }
         System.out.println("Preencha os dados a seguir:");
         for (int linha = matrizCadastro.length; linha < novaMatriz.length; linha++) {
-            System.out.println(cabecalho[0]+" - " + linha);
-            novaMatriz[linha][0] = String.valueOf(linha); // Converte valor inteiro para o String
+            System.out.println(cabecalho[0] + " - " + linha);
+            novaMatriz[linha][0] = String.valueOf(linha);
 
             for (int coluna = 1; coluna < cabecalho.length; coluna++) {
-                System.out.print(cabecalho[coluna]+": ");
+                System.out.print(cabecalho[coluna] + ": ");
                 novaMatriz[linha][coluna] = scanner.nextLine();
             }
         }
-        matrizCadastro=novaMatriz;
+        matrizCadastro = novaMatriz;
     }
+
     private static void atualizarUsuario() {
+        exibirUsuario();
+
+        System.out.print("\nDigite o ID do usuário que deseja atualizar: ");
+        int idEscolhido = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Atualize as informações a seguir:");
+
+        System.out.println(cabecalho[0] + " - " + idEscolhido);
+        for (int coluna = 1; coluna < cabecalho.length; coluna++) {
+            System.out.print(cabecalho[coluna] + ": ");
+            matrizCadastro[idEscolhido][coluna] = scanner.nextLine();
+        }
+        exibirUsuario();
     }
+
     private static void deletarUsuario() {
     }
 }
