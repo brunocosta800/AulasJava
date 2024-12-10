@@ -1,5 +1,9 @@
-package aula07.desafio;
+package aula08.desafio;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -82,6 +86,7 @@ public class Desafio {
             }
         }
         matrizCadastro = novaMatriz;
+        salvarDadosNoArquivo();
     }
 
     private static void atualizarUsuario() {
@@ -98,6 +103,7 @@ public class Desafio {
             matrizCadastro[idEscolhido][coluna] = scanner.nextLine();
         }
         exibirUsuario();
+        salvarDadosNoArquivo();
     }
 
     private static void deletarUsuario() {
@@ -117,5 +123,26 @@ public class Desafio {
         matrizCadastro = novaMatriz;
         System.out.println("Usuário deletado com sucesso!");
         exibirUsuario();
+        salvarDadosNoArquivo();
+    }
+
+    public static void salvarDadosNoArquivo(){
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(arquivo))){
+            for (String[] linha : matrizCadastro) {
+                bufferedWriter.write(String.join(",", linha) + "\n");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void carregarDadosDoArquivo(){
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(arquivo))){
+            while (){
+
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
