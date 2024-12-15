@@ -8,26 +8,34 @@ import java.util.Scanner;
 public class Exercicio1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        File arquivo = new File("src/aula08", "alunos.txt");
-        if(arquivo.exists()){
+        String[] nomesAlunos = new String[5];
+
+        File arquivo = new File("src" + File.separator + "aula08", "alunos.txt");
+        if (arquivo.exists()) {
             System.out.println("Arquivo já existe");
-        }else{
+        } else {
             try {
-                if(arquivo.createNewFile()){
+                if (arquivo.createNewFile()) {
                     System.out.println("Arquivo criado com sucesso: " + arquivo.getName());
-                }
-                else{
+                } else {
                     System.out.println("Falha ao criar o arquivo");
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
-        for (int aluno = 1; aluno <= 5; aluno++) {
+        for (int aluno = 0; aluno < 5; aluno++) {
             System.out.print("Digite o nome do aluno " + aluno + ": ");
-            try{
-                FileWriter writer = new FileWriter(arquivo);
-                writer.write(scanner.nextLine());
+            String nome = scanner.nextLine();
+            nomesAlunos[aluno] = nome;
+        }
+
+        for (String nome : nomesAlunos)
+        {
+            try {
+                try (FileWriter writer = new FileWriter(arquivo)) {
+                    writer.write(nome + "\n");
+                }
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
